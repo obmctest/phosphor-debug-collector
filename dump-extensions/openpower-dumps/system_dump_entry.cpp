@@ -117,10 +117,10 @@ void Entry::delete_()
                 .c_str());
     }
 
-    auto bus = sdbusplus::bus::new_default();
     // Log PEL for dump delete/offload
+    auto dBus = sdbusplus::bus::new_default();
     phosphor::dump::createPEL(
-        bus, dumpPathOffLoadUri, "System Dump", dumpId,
+        dBus, dumpPathOffLoadUri, "System Dump", dumpId,
         "xyz.openbmc_project.Logging.Entry.Level.Informational",
         "xyz.openbmc_project.Dump.Error.Invalidate");
 }
