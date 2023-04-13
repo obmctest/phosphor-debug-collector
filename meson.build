@@ -19,6 +19,7 @@ cpp = meson.get_compiler('cpp')
 # as output
 # eg: unit_file += {'input:'<path>, 'output':<service name>}
 unit_files = []
+conf_files = []
 
 # Checking dependency external library
 
@@ -308,6 +309,13 @@ foreach u : unit_files
         install_dir: systemd_system_unit_dir,
         output: u.get('output')
     )
+endforeach
+
+foreach c : conf_files
+    configure_file(
+        configuration: c.get('conf'),
+        output: c.get('header')
+        )
 endforeach
 
 if get_option('tests').enabled()
